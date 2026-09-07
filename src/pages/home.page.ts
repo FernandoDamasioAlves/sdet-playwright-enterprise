@@ -11,9 +11,18 @@ export class HomePage {
     this.page = page;
 
     this.logo = page.getByAltText('Website for automation practice');
-    this.productsLink = page.getByRole('link', { name: 'Products' });
-    this.signupLoginLink = page.getByRole('link', { name: /Signup \/ Login/i });
-    this.cartLink = page.getByRole('link', { name: /Cart/i });
+
+    this.productsLink = page.getByRole('link', {
+      name: 'Products',
+    });
+
+    this.signupLoginLink = page.getByRole('link', {
+      name: /Signup \/ Login/i,
+    });
+
+    this.cartLink = page.getByRole('link', {
+      name: /Cart/i,
+    });
   }
 
   async open(): Promise<void> {
@@ -26,5 +35,8 @@ export class HomePage {
     await expect(this.productsLink).toBeVisible();
     await expect(this.signupLoginLink).toBeVisible();
   }
+
+  async goToAuthentication(): Promise<void> {
+    await this.signupLoginLink.click();
+  }
 }
-//
