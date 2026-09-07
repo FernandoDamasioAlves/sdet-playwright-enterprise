@@ -4,6 +4,9 @@ import {
   type Page,
 } from '@playwright/test';
 
+import type { ProductReference } from '../data/models/product.model';
+import { parseRupees } from '../utils/currency';
+
 export class ProductDetailsPage {
   readonly page: Page;
 
@@ -14,6 +17,9 @@ export class ProductDetailsPage {
   readonly condition: Locator;
   readonly brand: Locator;
 
+  readonly quantityInput: Locator;
+  readonly addToCartButton: Locator;
+
   constructor(page: Page) {
     this.page = page;
 
@@ -23,8 +29,7 @@ export class ProductDetailsPage {
       .locator('.product-information p')
       .filter({ hasText: 'Category:' });
 
-    this.price = page
-      .locator('.product-information span span');
+    this.price = page.locator('.product-information span span');
 
     this.availability = page
       .locator('.product-information p')
@@ -37,6 +42,12 @@ export class ProductDetailsPage {
     this.brand = page
       .locator('.product-information p')
       .filter({ hasText: 'Brand:' });
+
+    this.quantityInput = page.locator('#quantity');
+
+    this.addToCartButton = page.locator(
+      'button.cart',
+    );
   }
 
   async validateLoaded(): Promise<void> {
@@ -59,5 +70,32 @@ export class ProductDetailsPage {
     await expect(this.availability).toContainText('In Stock');
     await expect(this.condition).toContainText('New');
     await expect(this.brand).toContainText('Polo');
+  }
+
+  async getReference(): Promise<ProductReference> {
+    const name =
+      (await this.productName.textContent())?.trim() ?? '';
+
+    const priceText =
+      (await this.price.textContent())?.trim() ?? '';
+
+    return {
+      name,
+      price: parseRupees(priceText),
+    };
+  }
+
+  async setQuantity(quantity: number): Promise<void> {
+    if (quantity < 1) {
+      throw new Error(
+        'A quantidade do produto deve ser maior que zero.',
+      );
+    }
+
+    await this.quantityInput.fill(String(quantity));
+  }
+
+  async addToCart(): Promise<void> {
+    await this.addToCartButton.click();
   }
 }

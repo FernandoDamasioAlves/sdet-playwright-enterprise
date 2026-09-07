@@ -8,6 +8,8 @@ import { shouldBlockThirdPartyRequest } from '../config/third-party-network';
 import { AccountApi } from '../services/account.api';
 
 import { AuthenticationPage } from '../pages/authentication.page';
+import { CartPage } from '../pages/cart.page';
+import { CartModal } from '../components/cart-modal.component';
 import { HomePage } from '../pages/home.page';
 import { ProductDetailsPage } from '../pages/product-details.page';
 import { ProductsPage } from '../pages/products.page';
@@ -16,6 +18,8 @@ import { RegistrationPage } from '../pages/registration.page';
 type ApplicationFixtures = {
   homePage: HomePage;
   authenticationPage: AuthenticationPage;
+  cartPage: CartPage;
+  cartModal: CartModal;
   registrationPage: RegistrationPage;
   productsPage: ProductsPage;
   productDetailsPage: ProductDetailsPage;
@@ -54,6 +58,14 @@ export const test = base.extend<ApplicationFixtures>({
 
   authenticationPage: async ({ page }, use) => {
     await use(new AuthenticationPage(page));
+  },
+
+  cartPage: async ({ page }, use) => {
+    await use(new CartPage(page));
+  },
+
+  cartModal: async ({ page }, use) => {
+    await use(new CartModal(page));
   },
 
   registrationPage: async ({ page }, use) => {

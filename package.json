@@ -14,7 +14,9 @@
     "report": "playwright show-report",
     "test:registration": "playwright test --grep @registration",
     "test:catalog": "playwright test --grep @catalog",
-    "test:search": "playwright test --grep @search"
+    "test:search": "playwright test --grep @search",
+    "test:cart": "playwright test --grep @cart",
+    "test:quantity": "playwright test --grep @quantity"
   },
   "keywords": [],
   "author": "",
