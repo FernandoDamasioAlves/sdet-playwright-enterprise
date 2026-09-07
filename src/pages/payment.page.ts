@@ -115,7 +115,7 @@ export class PaymentPage {
     ).toBeVisible();
 
     const downloadPromise =
-      this.page.waitForEvent('download');
+      this.page.waitForEvent('download', { timeout: 30_000 });
 
     await this.downloadInvoiceButton.click();
 
