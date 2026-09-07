@@ -1,5 +1,7 @@
 # SDET Playwright Enterprise
 
+[![Quality Gate](https://github.com/FernandoDamasioAlves/sdet-playwright-enterprise/actions/workflows/playwright.yml/badge.svg)](https://github.com/FernandoDamasioAlves/sdet-playwright-enterprise/actions/workflows/playwright.yml)
+
 Quality Engineering and test automation framework built with **Playwright and TypeScript**.
 
 [Versão em Português](README.md)
@@ -54,17 +56,40 @@ The suite currently covers:
 
 ## Cross-browser execution
 
+The complete suite supports three browser engines:
+
+- Chromium
+- Firefox
+- WebKit
+
+When executed locally, the complete regression contains:
+
 ~~~text
 12 scenarios
 x 3 browser engines
 = 36 executions
 ~~~
 
-Supported engines:
+### Required Quality Gate
 
-- Chromium
-- Firefox
-- WebKit
+On every `push` and `pull_request` targeting `main`, GitHub Actions executes:
+
+~~~text
+TypeScript Quality Gate
+        |
+        v
+Chromium Regression
+~~~
+
+Chromium is used as the required gate engine because it provides a stable execution against the public environment used by this project.
+
+### External cross-browser validation
+
+Firefox and WebKit remain fully supported by the framework and can be executed individually through the `Cross-Browser Validation` workflow.
+
+This validation is triggered on demand because the system under test is a public third-party application. During CI implementation, public GitHub Actions runners occasionally received anti-bot protection responses and intermediary pages from the external environment.
+
+Separating these executions prevents third-party environment availability or protection mechanisms from being classified as framework defects while preserving cross-browser coverage.
 
 ## Architecture
 

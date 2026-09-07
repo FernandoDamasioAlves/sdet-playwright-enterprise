@@ -1,5 +1,7 @@
 # SDET Playwright Enterprise
 
+[![Quality Gate](https://github.com/FernandoDamasioAlves/sdet-playwright-enterprise/actions/workflows/playwright.yml/badge.svg)](https://github.com/FernandoDamasioAlves/sdet-playwright-enterprise/actions/workflows/playwright.yml)
+
 Framework de automação desenvolvido para demonstrar práticas modernas de **Quality Engineering, QA Automation e SDET** utilizando Playwright e TypeScript.
 
 [English version](README.en.md)
@@ -85,7 +87,13 @@ O ambiente funcional utilizado é o **Automation Exercise**, uma aplicação pú
 
 ## Execução cross-browser
 
-A regressão atual possui:
+A suíte completa suporta três engines:
+
+- Chromium
+- Firefox
+- WebKit
+
+Em execução local, a regressão completa possui:
 
 ~~~text
 12 cenários
@@ -93,11 +101,26 @@ x 3 engines
 = 36 execuções
 ~~~
 
-Engines:
+### Quality Gate obrigatório
 
-- Chromium
-- Firefox
-- WebKit
+Em `push` e `pull_request` para `main`, o GitHub Actions executa:
+
+~~~text
+TypeScript Quality Gate
+        |
+        v
+Chromium Regression
+~~~
+
+O Chromium é utilizado como engine do gate obrigatório por fornecer uma execução estável contra o ambiente público utilizado pelo projeto.
+
+### Validação cross-browser externa
+
+Firefox e WebKit permanecem cobertos pelo framework e podem ser executados individualmente pelo workflow `Cross-Browser Validation`.
+
+Essa validação é executada sob demanda porque o sistema utilizado nos testes é uma aplicação pública de terceiros. Durante a implantação do CI foram observadas respostas de proteção anti-bot e páginas intermediárias do ambiente externo em runners públicos do GitHub Actions.
+
+A separação evita classificar indisponibilidade ou proteção do ambiente externo como defeito do framework, sem remover a cobertura cross-browser.
 
 ## Arquitetura
 
