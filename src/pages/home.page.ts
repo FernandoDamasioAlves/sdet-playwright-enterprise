@@ -39,4 +39,12 @@ export class HomePage {
   async goToAuthentication(): Promise<void> {
     await this.signupLoginLink.click();
   }
+
+  async goToProducts(): Promise<void> {
+    await this.productsLink.click();
+
+    await expect(this.page).toHaveURL(
+      /\/products(?:[?#]|$)/,
+    );
+  }
 }

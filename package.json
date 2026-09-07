@@ -12,7 +12,9 @@
     "test:ui": "playwright test --ui",
     "typecheck": "tsc --noEmit",
     "report": "playwright show-report",
-    "test:registration": "playwright test --grep @registration"
+    "test:registration": "playwright test --grep @registration",
+    "test:catalog": "playwright test --grep @catalog",
+    "test:search": "playwright test --grep @search"
   },
   "keywords": [],
   "author": "",
