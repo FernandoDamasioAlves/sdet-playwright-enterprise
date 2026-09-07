@@ -47,6 +47,25 @@ export class AccountApi {
     expect(body.message).toBe('Account deleted!');
   }
 
+  async deleteAccountIfExists(user: TestUser): Promise<void> {
+    const response = await this.request.delete('/api/deleteAccount', {
+      form: {
+        email: user.email,
+        password: user.password,
+      },
+    });
+
+    if (!response.ok()) {
+      return;
+    }
+
+    const body = await this.parseResponse(response);
+
+    if (body.responseCode === 200) {
+      expect(body.message).toBe('Account deleted!');
+    }
+  }
+
   private toAccountForm(user: TestUser): Record<string, string> {
     return {
       name: user.name,
