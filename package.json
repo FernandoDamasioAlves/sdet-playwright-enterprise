@@ -16,7 +16,9 @@
     "test:catalog": "playwright test --grep @catalog",
     "test:search": "playwright test --grep @search",
     "test:cart": "playwright test --grep @cart",
-    "test:quantity": "playwright test --grep @quantity"
+    "test:quantity": "playwright test --grep @quantity",
+    "test:checkout": "playwright test --grep @checkout",
+    "test:e2e": "playwright test --grep @e2e"
   },
   "keywords": [],
   "author": "",

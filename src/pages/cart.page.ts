@@ -11,11 +11,20 @@ export class CartPage {
   readonly page: Page;
   readonly cartTable: Locator;
   readonly cartRows: Locator;
+  readonly proceedToCheckoutButton: Locator;
 
   constructor(page: Page) {
     this.page = page;
+
     this.cartTable = page.locator('#cart_info_table');
-    this.cartRows = page.locator('#cart_info_table tbody tr');
+
+    this.cartRows = page.locator(
+      '#cart_info_table tbody tr',
+    );
+
+    this.proceedToCheckoutButton = page.locator(
+      'a.check_out',
+    );
   }
 
   async validateLoaded(): Promise<void> {
@@ -46,5 +55,17 @@ export class CartPage {
     const item = this.itemByName(expected.name);
 
     await item.validate(expected);
+  }
+
+  async proceedToCheckout(): Promise<void> {
+    await expect(
+      this.proceedToCheckoutButton,
+    ).toBeVisible();
+
+    await this.proceedToCheckoutButton.click();
+
+    await expect(this.page).toHaveURL(
+      /\/checkout(?:[?#]|$)/,
+    );
   }
 }

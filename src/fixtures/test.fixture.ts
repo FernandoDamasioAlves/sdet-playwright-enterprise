@@ -9,6 +9,8 @@ import { AccountApi } from '../services/account.api';
 
 import { AuthenticationPage } from '../pages/authentication.page';
 import { CartPage } from '../pages/cart.page';
+import { CheckoutPage } from '../pages/checkout.page';
+import { PaymentPage } from '../pages/payment.page';
 import { CartModal } from '../components/cart-modal.component';
 import { HomePage } from '../pages/home.page';
 import { ProductDetailsPage } from '../pages/product-details.page';
@@ -19,6 +21,8 @@ type ApplicationFixtures = {
   homePage: HomePage;
   authenticationPage: AuthenticationPage;
   cartPage: CartPage;
+  checkoutPage: CheckoutPage;
+  paymentPage: PaymentPage;
   cartModal: CartModal;
   registrationPage: RegistrationPage;
   productsPage: ProductsPage;
@@ -62,6 +66,14 @@ export const test = base.extend<ApplicationFixtures>({
 
   cartPage: async ({ page }, use) => {
     await use(new CartPage(page));
+  },
+
+  checkoutPage: async ({ page }, use) => {
+    await use(new CheckoutPage(page));
+  },
+
+  paymentPage: async ({ page }, use) => {
+    await use(new PaymentPage(page));
   },
 
   cartModal: async ({ page }, use) => {
