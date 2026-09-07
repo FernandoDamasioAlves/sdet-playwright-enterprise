@@ -1,7 +1,7 @@
 {
   "name": "sdet-playwright-enterprise",
   "version": "1.0.0",
-  "description": "",
+  "description": "Framework de Quality Engineering e automação E2E com Playwright, TypeScript, API-driven test data, execução cross-browser e CI/CD.",
   "main": "index.js",
   "scripts": {
     "test": "playwright test",
@@ -20,9 +20,18 @@
     "test:checkout": "playwright test --grep @checkout",
     "test:e2e": "playwright test --grep @e2e"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "playwright",
+    "typescript",
+    "sdet",
+    "quality-engineering",
+    "test-automation",
+    "e2e-testing",
+    "qa",
+    "cross-browser"
+  ],
+  "author": "Fernando Damasio",
+  "license": "MIT",
   "type": "commonjs",
   "devDependencies": {
     "@playwright/test": "^1.63.0",
